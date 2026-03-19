@@ -323,6 +323,7 @@ err_parameter:
 int ged_dmabuf_set_name(int32_t share_fd, char *name)
 {
 	struct dma_buf *dmabuf;
+	int ret = 0;
 	if (share_fd < 0) {
 		GED_PDEBUG("%s: invalid value of share_fd %d", __func__, share_fd);
 		return -1;
@@ -334,17 +335,13 @@ int ged_dmabuf_set_name(int32_t share_fd, char *name)
 	}
 
 	dmabuf = dma_buf_get(share_fd);
-
-	if (IS_ERR_OR_NULL(dmabuf)) {
+    if (IS_ERR_OR_NULL(dmabuf)) {
 		GED_PDEBUG("%s: dma_buf_get return NULL", __func__);
 		return -1;
 	}
 
-	int ret = 0;
-
 	ret = mtk_dma_buf_set_name(dmabuf, name);
-
-	dma_buf_put(dmabuf);
+    dma_buf_put(dmabuf);
 
 	return ret;
 }
