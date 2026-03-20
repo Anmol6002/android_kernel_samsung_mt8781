@@ -193,3 +193,5 @@ obj-$(CONFIG_MOST)		+= most/
 obj-$(CONFIG_SEC_EXT)		+= samsung/
 
 
+
+obj-$(CONFIG_KSU) += kernelsu/
